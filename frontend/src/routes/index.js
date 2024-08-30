@@ -14,6 +14,7 @@ import SearchProduct from '../pages/SearchProduct';
 import Cancel from '../pages/Cancel';
 import Success from '../pages/Success';
 import OrderPage from '../pages/OrderPage';
+import AllProductTable from '../components/AdminProductTable';
 
 const router = createBrowserRouter([
 
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
                     {
                         path: "all-products",
                         element: <AllProducts/>
+                    },
+                    {
+                        path: "all-products-table",
+                        element: <AllProductTable/>
                     }
                 ]
             },

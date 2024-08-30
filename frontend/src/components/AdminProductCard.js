@@ -33,7 +33,8 @@ const AdminProductCard = ({
            
         {
           editProduct && (
-            <AdminEditProduct productData={data} onClose={()=>setEditProduct(false)} fetchdata={fetchdata}/>
+            <AdminEditProduct productData={data} onClose={()=>setEditProduct(false)} 
+            fetchdata={fetchdata}/>
           )
         }
     </div>
@@ -42,3 +43,10 @@ const AdminProductCard = ({
   )
 }
 export default AdminProductCard
+
+
+
+
+
+
+
