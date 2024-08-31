@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 
+
 const userSignUpController = require('../controller/user/userSignUp')
 const userSignInController = require('../controller/user/userSignIn')
 const userDetailsController = require('../controller/user/userDetails')
@@ -24,6 +25,7 @@ const deleteAddToCartProduct = require('../controller/user/deleteAddToCartProduc
 const searchProduct = require('../controller/product/searchProduct')
 const filterProductController = require('../controller/product/filterProduct')
 const paymentController = require('../controller/order/paymentController')
+const deleteProductController = require('../controller/product/deleteProduct')
 
 
 router.post("/signup",userSignUpController)
@@ -39,6 +41,8 @@ router.post("/update-user",authToken,updateUser)
 router.post("/upload-product",authToken,UploadProductController)
 router.get("/get-product",getProductController)
 router.post("/update-product",authToken,updateProductController)
+router.delete('/delete-product/:id',authToken, deleteProductController);
+
 //getproduct to homepage
 router.get("/get-categoryProduct",getCategoryProduct)
 router.post("/category-product",getCategoryWiseProduct)

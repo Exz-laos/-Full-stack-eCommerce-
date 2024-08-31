@@ -82,6 +82,10 @@ const SummaryApi ={
     payment : {
         url : `${backendDomain}/api/checkout` ,
         method: "post"
+    },
+    deleteProduct : {
+        url : `${backendDomain}/api/delete-product` ,
+        method: "DELETE"
     }
     
 }

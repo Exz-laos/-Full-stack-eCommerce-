@@ -219,10 +219,7 @@ const ProductDetails = () => {
                       text-white bg-yellow-600 hover:text-yellow-600 hover:bg-white' 
                       onClick={(e) => handleAddToCart(e,data?._id)}>Add To Cart</button>
                    </div>
-                   {/* <div>
-                     <p className='text-slate-600 font-medium my-1'>Description : </p>
-                     <p className='lao-text' >{data?.description}</p>
-                   </div>       */}
+            
                    <div>
                         <p className='text-slate-600 font-medium my-1'>Description :</p>
                         <div
