@@ -19,7 +19,9 @@ const UploadProduct = ({
         productImage : [], //because need to upload multiple images
         description : "",
         price : "",
-        sellingPrice : ""
+        sellingPrice : "",
+        quantity: "",
+        available:true,
       })
 
 
@@ -221,19 +223,42 @@ const UploadProduct = ({
               />
                 {/* description */}
 
-              <label htmlFor='description' className='mt-3'>Description :</label>
+              <label htmlFor='description' className='mt-3 lao-text'>ຂໍ້ມູນສິນຄ້າ :</label>
               <textarea 
-                className='h-28 bg-slate-100 border resize-none p-1' 
-                placeholder='enter product description' 
+                className='lao-text h-28 bg-slate-100 border resize-none p-1' 
+                placeholder='ກອກຂໍ້ມູນສິນຄ້າ' 
                 rows={3} 
                 onChange={handleOnChange} 
                 name='description'
                 value={data.description}
               >
+      
               </textarea>
+               {/* quantity */}
+              <label htmlFor='quantity' className='mt-3 lao-text'>ຈຳນວນສິນຄ້າພ້ອມສົ່ງ :</label>
+              <input 
+                type='number' 
+                id='quantity' 
+                placeholder='ກອກຈຳນວນສິນຄ້າ' 
+                value={data.quantity} 
+                name='quantity'
+                onChange={handleOnChange}
+                className='lao-text p-2 bg-slate-100 border rounded'
+                required
+              />
+              <label htmlFor='available' className='mt-3 lao-text'>ສະຖານະ:</label>
+                    <select
+                        value={data.available}
+                        name='available'
+                        onChange={handleOnChange}
+                        className='p-2 bg-slate-100 border rounded'
+                    >
+                        <option value={true}>Available</option>
+                        <option value={false}>Not Available</option>
+                    </select>
 
-              <button className='px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700'>
-                   Upload Product
+              <button className='lao-text px-3 py-2 bg-yellow-600 text-white mb-10 hover:bg-yellow-700'>
+                   ເພີ່ມສິນຄ້າ
               </button>
             </form>
 
