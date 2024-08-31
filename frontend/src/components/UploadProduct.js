@@ -7,6 +7,8 @@ import { MdDelete } from "react-icons/md";
 import DisplayImage from './DisplayImage';
 import SummaryApi from '../common';
 import { toast } from 'react-toastify';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 const UploadProduct = ({
     onClose,
     fetchData
@@ -39,6 +41,13 @@ const UploadProduct = ({
           }
         })
     }
+
+    const handleDescriptionChange = (value) => {
+      setData((prev) => ({
+        ...prev,
+        description: value,
+      }));
+    };
 
     const handleUploadProduct = async(e) => {
         const file = e.target.files[0]
@@ -223,7 +232,7 @@ const UploadProduct = ({
               />
                 {/* description */}
 
-              <label htmlFor='description' className='mt-3 lao-text'>ຂໍ້ມູນສິນຄ້າ :</label>
+              {/* <label htmlFor='description' className='mt-3 lao-text'>ຂໍ້ມູນສິນຄ້າ :</label>
               <textarea 
                 className='lao-text h-28 bg-slate-100 border resize-none p-1' 
                 placeholder='ກອກຂໍ້ມູນສິນຄ້າ' 
@@ -232,8 +241,23 @@ const UploadProduct = ({
                 name='description'
                 value={data.description}
               >
-      
-              </textarea>
+              
+              </textarea> */}
+
+               {/* Other input fields... */}
+          
+               <label htmlFor='description' className='mt-3'>Description:</label>
+              <div className='lao-text'>
+                <ReactQuill
+                  value={data.description}
+                  onChange={handleDescriptionChange}
+                  className='h-28 bg-slate-100 border resize-none p-1'
+                  placeholder='Enter product description'
+                />
+              </div>
+
+
+     
                {/* quantity */}
               <label htmlFor='quantity' className='mt-3 lao-text'>ຈຳນວນສິນຄ້າພ້ອມສົ່ງ :</label>
               <input 

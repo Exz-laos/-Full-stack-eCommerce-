@@ -7,6 +7,8 @@ import DisplayImage from './DisplayImage';
 import { MdDelete } from "react-icons/md";
 import SummaryApi from '../common';
 import {toast} from 'react-toastify'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 
 const AdminEditProduct = ({
     onClose,
@@ -65,6 +67,12 @@ const AdminEditProduct = ({
     })
     
   }
+  const handleDescriptionChange = (value) => {
+    setData((prev) => ({
+      ...prev,
+      description: value,
+    }));
+  };
 
 
   {/**update product */}
@@ -97,13 +105,15 @@ const AdminEditProduct = ({
 
   }
 
+
+
   return (
     <div className='fixed w-full  h-full bg-slate-200 bg-opacity-35 top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
     <div className='bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden'>
 
          <div className='flex justify-between items-center pb-3'>
              <h2 className='font-bold text-lg'>Edit Product</h2>
-             <div className='w-fit ml-auto text-2xl hover:text-red-600 cursor-pointer' onClick={onClose}>
+             <div className='w-fit ml-auto text-2xl hover:text-yellow-600 cursor-pointer' onClick={onClose}>
                  <CgClose/>
              </div>
          </div>
@@ -216,16 +226,41 @@ const AdminEditProduct = ({
              required
            />
 
-           <label htmlFor='description' className='mt-3'>Description :</label>
-           <textarea 
-             className='h-28 bg-slate-100 border resize-none p-1' 
-             placeholder='enter product description' 
-             rows={3} 
-             onChange={handleOnChange} 
-             name='description'
-             value={data.description}
-           >
-           </textarea>
+
+            <label htmlFor='description' className='mt-3'>Description:</label>
+              <div className='lao-text'>
+                <ReactQuill
+                  value={data.description}
+                  onChange={handleDescriptionChange}
+                  className='h-28 bg-slate-100 border resize-none p-1'
+                  placeholder='Enter product description'
+                />
+              </div>
+
+       
+
+                  {/* quantity */}
+            <label htmlFor='quantity' className='mt-3 lao-text'>ຈຳນວນສິນຄ້າພ້ອມສົ່ງ :</label>
+              <input 
+                type='number' 
+                id='quantity' 
+                placeholder='ກອກຈຳນວນສິນຄ້າ' 
+                value={data.quantity} 
+                name='quantity'
+                onChange={handleOnChange}
+                className='lao-text p-2 bg-slate-100 border rounded'
+                required
+              />
+              <label htmlFor='available' className='mt-3 lao-text'>ສະຖານະ:</label>
+                    <select
+                        value={data.available}
+                        name='available'
+                        onChange={handleOnChange}
+                        className='p-2 bg-slate-100 border rounded'
+                    >
+                        <option value={true}>Available</option>
+                        <option value={false}>Not Available</option>
+                    </select>
 
 
 

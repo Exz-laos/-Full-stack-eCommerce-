@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import UploadProduct from '../components/UploadProduct';
 import SummaryApi from '../common';
@@ -11,8 +10,6 @@ const AllProducts = () => {
   const fetchAllProduct = async () => {
     const response = await fetch(SummaryApi.allProduct.url);
     const dataResponse = await response.json();
-
-    console.log("product data", dataResponse);
 
     setAllProduct(dataResponse?.data || []);
   };
@@ -35,16 +32,17 @@ const AllProducts = () => {
       </div>
 
       {/* All product table */}
-      <div className='flex items-center flex-wrap gap-5 py-4 h-[calc(100vh-190px)] overflow-y-scroll'>
-        <table className='w-full'>
+      <div className='py-4 h-[calc(100vh-190px)] overflow-y-scroll'>
+        <table className='w-full border-collapse table-auto'>
           <thead>
             <tr className='bg-black text-white'>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Sell</th>
-              <th>Quantity</th>
-              <th>Edit</th>
+              <th className='border border-gray-200 p-2 w-10'>Image</th>
+              <th className='border border-gray-200 p-2'>Name</th>
+              <th className='border border-gray-200 p-2'>Category</th>
+              <th className='border border-gray-200 p-2'>Sell</th>
+              <th className='border border-gray-200 p-2'>Quantity</th>
+              <th className='border border-gray-200 p-2'>status</th>
+              <th className='border border-gray-200 p-2'>Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -64,5 +62,3 @@ const AllProducts = () => {
 };
 
 export default AllProducts;
-
-
