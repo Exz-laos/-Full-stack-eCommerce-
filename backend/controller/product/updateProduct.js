@@ -12,7 +12,7 @@ async function updateProductController(req,res){
         const updateProduct = await productModel.findByIdAndUpdate(_id,resBody)
         
         res.json({
-            message : "Product update successfully",
+            message : "ການອັບເດດຂໍ້ມູນສິນຄ້າສໍາເລັດແລ້ວ",
             data : updateProduct,
             success : true,
             error : false

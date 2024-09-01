@@ -10,7 +10,13 @@ import { toast } from 'react-toastify';
 import { setUserDetails } from '../store/userSlice';
 import ROLE from '../common/role';
 import Context from '../context';
+import image1 from '../assest/325398375_559071516095120_8785059472683896725_n.jpg'
 const Header = () => {
+  const [currentImage,setCurrentImage] = useState(0)
+  const LogoIMG = [
+      image1,
+  
+  ]
   const user = useSelector(state => state?.user?.user)
   const dispatch = useDispatch()
 
@@ -65,17 +71,18 @@ const Header = () => {
   return (
     <header className='h-16 shadow-md bg-white fixed w-full z-40'>
         <div className='h-full container mx-auto flex items-center px-4 justify-between'>
-            <div className=''>
-                <Link to={'/'}>
+            <Link to={'/'} className='w-10 h-10'>
+              <img src={LogoIMG[currentImage]} alt="logo"/>
+                {/* <Link to={'/'}>
                   <Logo w= {90} h={50}/>
-                </Link>
+                </Link> */}
 
-            </div>
+            </Link>
 
             <div className='hidden lg:flex items w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
                 <input type='text' placeholder='search product here ...' className='w-full outline-none '
                 onChange={handleSearch} value={search}/>
-                <div className='text-lg min-w-[50px] h-8 bg-red-600 flex items-center justify-center rounded-r-full text-white'> 
+                <div className='text-lg min-w-[50px] h-8 bg-yellow-600 flex items-center justify-center rounded-r-full text-white'> 
                    <IoSearchSharp />
                 </div>
             </div>
@@ -133,7 +140,7 @@ const Header = () => {
                      user?._id && (
                       <Link to={'/cart'} className='text-2xl relative'>
                            <span>  <FaShoppingCart /> </span> 
-                           <div className='bg-red-600 text-white 
+                           <div className='bg-yellow-600 text-white 
                               w-5 h-5 rounded-full p-1 flex items-center 
                               justify-center absolute -top-2 -right-3  '>
                               <p className='text-sm'>{context?.cartProductCount}</p>
@@ -147,11 +154,11 @@ const Header = () => {
                   {
                     user?._id ? (
                       <button onClick={handleLogout} className='px-3 py-1 rounded-full
-                      text-white bg-red-600 hover:bg-red-700'>Logout</button>
+                      text-white bg-yellow-600 hover:bg-yellow-700'>Logout</button>
 
                     )
                     :(   <Link to={'/login'} className='px-3 py-1 rounded-full
-                       text-white bg-red-600 hover:bg-red-700'>Login</Link>)
+                       text-white bg-yellow-600 hover:bg-yellow-700'>Login</Link>)
                   }
              
                 </div>

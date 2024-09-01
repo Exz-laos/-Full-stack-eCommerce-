@@ -20,14 +20,14 @@ const AllProducts = () => {
 
   return (
     <div>
-      <div className='bg-white py-2 px-4 flex justify-between items-center'>
-        <h2 className='font-bold text-lg'>All Product</h2>
+      <div className='lao-text bg-white py-2 px-4 flex justify-between items-center'>
+        <h2 className='font-bold text-lg'>ສິນຄ້າທັງໝົດ</h2>
         <button
-          className='border-2 border-yellow-600 text-yellow-600 hover:bg-yellow-600
+          className='lao-text border-2 border-yellow-600 text-yellow-600 hover:bg-yellow-600
              hover:text-white transition-all py-1 px-3 rounded-full'
           onClick={() => setOpenUploadProduct(true)}
         >
-          Upload Product
+          ເພີ່ມສິນຄ້າ
         </button>
       </div>
 
@@ -36,13 +36,13 @@ const AllProducts = () => {
         <table className='w-full border-collapse table-auto'>
           <thead>
             <tr className='bg-yellow-700 text--black'>
-              <th className='border border-gray-200 p-2 w-5'>Image</th>
-              <th className='border border-gray-200 p-2'>Name</th>
-              <th className='border border-gray-200 p-2'>Category</th>
-              <th className='border border-gray-200 p-2'>Sell</th>
-              <th className='border border-gray-200 p-2'>Quantity</th>
-              <th className='border border-gray-200 p-2'>status</th>
-              <th className='border border-gray-200 p-2'>Edit</th>
+              <th className='lao-text border border-gray-200 p-2 w-5'>ຮູບພາບ</th>
+              <th className='lao-text border border-gray-200 p-2'>ຊື່ສິນຄ້າ</th>
+              <th className='lao-text border border-gray-200 p-2'>ປະເພດ</th>
+              <th className='lao-text border border-gray-200 p-2'>ລາຄາຂາຍ</th>
+              <th className='lao-text border border-gray-200 p-2'>ພ້ອມສົ່ງ</th>
+              <th className='lao-text border border-gray-200 p-2'>ສະຖານະ</th>
+              <th className='lao-text border border-gray-200 p-2'>ແກ້ໄຂ</th>
             </tr>
           </thead>
           <tbody>

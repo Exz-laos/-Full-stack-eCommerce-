@@ -21,3 +21,28 @@ code {
 .lao-text {
   font-family: 'Noto Sans Lao', 'Phetsarath OT', sans-serif;
 }
+/* In your CSS file or inside a <style> tag */
+.ql-editor::before {
+  font-family: 'Noto Sans Lao', 'Phetsarath OT', sans-serif; /* Replace with your desired font */
+  color: #9ca3af; /* Optional: Customize the placeholder color */
+  font-style: italic; /* Optional: Add italic style if needed */
+}
+
+/* lao-text class to apply the custom font to the editor's text content */
+.lao-text .ql-editor {
+  font-family: 'Noto Sans Lao', 'Phetsarath OT', sans-serif;
+}
+
+/* In your CSS file */
+.swal2-popup {
+  font-family: 'Noto Sans Lao', 'Phetsarath OT', sans-serif;/* Apply your custom font */
+}
+
+/* Additional styling for the Swal2 elements if needed */
+.swal2-title {
+  font-family: 'Noto Sans Lao', 'Phetsarath OT', sans-serif; /* Title font */
+}
+
+.swal2-html-container, .swal2-actions {
+  font-family: 'Noto Sans Lao', 'Phetsarath OT', sans-serif; /* Content font */
+}

@@ -198,14 +198,9 @@ const ProductDetails = () => {
                       <div  className='flex flex-col gap-1'>
                       <p className='bg-yellow-200 text-yellow-600 px-2 rounded-full inline-block w-fit'>
                           {data.brandName}</p>
-                      <h2 className='text-2xl lg:text-4xl font-medium'>{data?.productName}</h2>
+                      <h2 className='lao-text text-2xl lg:text-4xl font-medium'>{data?.productName}</h2>
                       <p className='capitalize text-slate-400'>{data?.category}</p>
                       <div className='text-yellow-600 flex items-center gap-1'>
-                       <FaStar/>
-                       <FaStar/>
-                       <FaStar/>
-                       <FaStar/>
-                       <FaStarHalf/>
                    </div>
                    <div className='flex items-center gap-2 text-2xl lg:text-3xl font-medium my-1'>
                      <p className='text-yellow-600'>{displayKIPCurrency(data.sellingPrice)}</p>

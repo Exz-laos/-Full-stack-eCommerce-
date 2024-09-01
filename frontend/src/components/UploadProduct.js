@@ -6,7 +6,7 @@ import uploadImage from '../helpers/uploadImage';
 import { MdDelete } from "react-icons/md";
 import DisplayImage from './DisplayImage';
 import SummaryApi from '../common';
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 const UploadProduct = ({
@@ -79,51 +79,75 @@ const UploadProduct = ({
 
 
        {/**upload product */}
-    const handleSubmit = async(e) =>{
-        e.preventDefault()
-        const response = await fetch(SummaryApi.uploadProduct.url,{
-          method : SummaryApi.uploadProduct.method,
-          credentials : 'include',
-          headers : {
-            "content-type" : "application/json"
-          },
-          body : JSON.stringify(data)
-        })
-        const responseData = await response.json()
-
-        if(responseData.success){
-            toast.success(responseData?.message)
-            onClose() //in time upload will be close immediately
-            fetchData()
+       const handleSubmit = async (e) => {
+        e.preventDefault();
+      
+        try {
+          const response = await fetch(SummaryApi.uploadProduct.url, {
+            method: SummaryApi.uploadProduct.method,
+            credentials: 'include',
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          });
+      
+          const responseData = await response.json();
+      
+          if (response.ok && responseData.success) {
+            Swal.fire({
+              title: 'ສຳເລັດ!',
+              text: responseData.message,
+              icon: 'success',
+              timer: 1000, // Auto-close after 2 seconds
+              showConfirmButton: false, // Hide the confirm button
+              willClose: () => {
+                onClose(); // Close the modal or perform any other action
+                fetchData(); // Fetch updated data
+              }
+            });
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: responseData.message || 'Failed to upload the product.',
+              icon: 'error',
+              timer: 2000, // Auto-close after 2 seconds
+              showConfirmButton: false // Hide the confirm button
+            });
+          }
+        } catch (error) {
+          console.error('Upload product error:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'An error occurred while uploading the product.',
+            icon: 'error',
+            timer: 2000, // Auto-close after 2 seconds
+            showConfirmButton: false // Hide the confirm button
+          });
         }
-        
-       
-        if(responseData.error){
-          toast.error(responseData?.message)
-        }
-    }
+      };
 
 
 
 
   return (
-    <div className='fixed w-full h-full bg-slate-200 bg-opacity-35
+    <div className='lao-text fixed w-full h-full bg-slate-200 bg-opacity-35
          top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
       <div  className='bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden'>
 
             <div className='flex justify-between items-center pb-3'>
-                <h2 className='font-bold text-lg'>Upload Product</h2>
+                <h2 className='font-bold text-lg'>ເພີ່ມສິນຄ້າ</h2>
                 <div className='w-fit ml-auto text-2xl hover:text-red-600 cursor-pointer'onClick={onClose} >
                     <CgClose/>
                 </div>
             </div>
 
             <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
-                 <label htmlFor='productName'>Product Name :</label>
+                 <label htmlFor='productName'>ຊື່ສິນຄ້າ :</label>
                  <input 
                     type='text' 
                     id='productName' 
-                    placeholder='enter product name' 
+                    placeholder='ກະລຸນາກອກຊື່ສິນຄ້າ' 
                     name='productName'
                     value={data.productName} 
                     onChange={handleOnChange}
@@ -131,11 +155,11 @@ const UploadProduct = ({
                     required
                  />
                  {/* brandName */}
-                 <label htmlFor='brandName' className='mt-3'>Brand Name :</label>
+                 <label htmlFor='brandName' className='mt-3'>ຊື່ແບນ ຫຼື ຍີ່ຫໍ່ :</label>
                     <input 
                     type='text' 
                     id='brandName' 
-                    placeholder='enter brand name' 
+                    placeholder='ກະລຸນາກອກຊື່ແບນ ຫຼື ຍີ່ຫໍ່' 
                     value={data.brandName} 
                     name='brandName'
                     onChange={handleOnChange}
@@ -143,10 +167,10 @@ const UploadProduct = ({
                     required
                     />
                 {/* category */}
-                  <label htmlFor='category' className='mt-3'>Category :</label>
+                  <label htmlFor='category' className='mt-3 '>ປະເພດສິນຄ້າ :</label>
                     <select required value={data.category} name='category' onChange={handleOnChange} 
                             className='p-2 bg-slate-100 border rounded'>
-                     <option value={""}>Select Category</option>
+                     <option value={""}>ເລືອກປະເພດສິນຄ້າ</option>
                        {
                           productCategory.map((el,index)=>{
                             return(
@@ -156,13 +180,13 @@ const UploadProduct = ({
                        }        
                     </select>
                 {/* Product Image */}
-                <label htmlFor='productImage' className='mt-3'>Product Image :</label>
+                <label htmlFor='productImage' className='mt-3'>ຮູບພາບສິນຄ້າ :</label>
                  <label htmlFor='uploadImageInput'>
                     <div className='p-2 bg-slate-100 border rounded h-32 w-full flex 
                     justify-center items-center cursor-pointer'>
                             <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
                             <span className='text-4xl'><FaCloudUploadAlt/></span>
-                            <p className='text-sm'>Upload Product Image</p>
+                            <p className='text-sm'>ເພີ່ມຮູບພາບ</p>
                             <input type='file' id='uploadImageInput'  className='hidden' 
                                 onChange={handleUploadProduct}   />
                             </div>
@@ -200,18 +224,18 @@ const UploadProduct = ({
                             }
                         </div>
                     ) : (
-                      <p className='text-red-600 text-xs'>*Please upload product image</p>
+                      <p className='text-red-600 text-xs'>*ກະລຸນາເພີ່ມຮູບພາບສິນຄ້າທີ່ຈະສະແດງເທິງໜ້າຮ້ານ</p>
                     )
                   }
                   
               </div>
 
                 {/* Price */}
-              <label htmlFor='price' className='mt-3'>Price :</label>
+              <label htmlFor='price' className='mt-3'>ລາຄາປົກກະຕິ :</label>
               <input 
                 type='number' 
                 id='price' 
-                placeholder='enter price' 
+                placeholder='ກະລຸນາກອກລາຄາສິນຄ້າ' 
                 value={data.price} 
                 name='price'
                 onChange={handleOnChange}
@@ -219,11 +243,11 @@ const UploadProduct = ({
                 required
               />
               {/* sellingPrice */}
-              <label htmlFor='sellingPrice' className='mt-3'>Selling Price :</label>
+              <label htmlFor='sellingPrice' className='mt-3'>ລາຄາຂາຍໜ້າເວັບ :</label>
               <input 
                 type='number' 
                 id='sellingPrice' 
-                placeholder='enter selling price' 
+                placeholder='ກະລຸນາກອກລາຄາຂາຍຂອງສິນຄ້າ' 
                 value={data.sellingPrice} 
                 name='sellingPrice'
                 onChange={handleOnChange}
@@ -232,38 +256,27 @@ const UploadProduct = ({
               />
                 {/* description */}
 
-              {/* <label htmlFor='description' className='mt-3 lao-text'>ຂໍ້ມູນສິນຄ້າ :</label>
-              <textarea 
-                className='lao-text h-28 bg-slate-100 border resize-none p-1' 
-                placeholder='ກອກຂໍ້ມູນສິນຄ້າ' 
-                rows={3} 
-                onChange={handleOnChange} 
-                name='description'
-                value={data.description}
-              >
-              
-              </textarea> */}
-
-               {/* Other input fields... */}
+            
           
-               <label htmlFor='description' className='mt-3'>Description:</label>
+               <label htmlFor='description' className='mt-3'>ຂໍ້ມູນສິນຄ້າ :</label>
               <div className='lao-text'>
                 <ReactQuill
                   value={data.description}
                   onChange={handleDescriptionChange}
-                  className='h-28 bg-slate-100 border resize-none p-1'
-                  placeholder='Enter product description'
+                  className='h-28 bg-slate-100 border resize-none p-1 lao-text'
+                  placeholder='ກະລຸນາກອກຂໍ້ມູນສິນຄ້າ'
+
                 />
               </div>
 
 
      
                {/* quantity */}
-              <label htmlFor='quantity' className='mt-3 lao-text'>ຈຳນວນສິນຄ້າພ້ອມສົ່ງ :</label>
+              <label htmlFor='quantity' className='mt-3 lao-text'>ຈຳນວນສິນຄ້າ :</label>
               <input 
                 type='number' 
                 id='quantity' 
-                placeholder='ກອກຈຳນວນສິນຄ້າ' 
+                placeholder='ກະລຸນາກອກຈຳນວນສິນຄ້າພ້ອມສົ່ງ' 
                 value={data.quantity} 
                 name='quantity'
                 onChange={handleOnChange}
@@ -277,8 +290,8 @@ const UploadProduct = ({
                         onChange={handleOnChange}
                         className='p-2 bg-slate-100 border rounded'
                     >
-                        <option value={true}>Available</option>
-                        <option value={false}>Not Available</option>
+                        <option value={true}>ສິນຄ້າມີພ້ອມສົ່ງ</option>
+                        <option value={false}>ບໍ່ມີສິນຄ້າພ້ອມສົ່ງ</option>
                     </select>
 
               <button className='lao-text px-3 py-2 bg-yellow-600 text-white mb-10 hover:bg-yellow-700'>
