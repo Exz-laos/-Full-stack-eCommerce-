@@ -5,8 +5,9 @@ import displayKIPCurrency from '../helpers/displayCurrency';
 import AdminEditProduct from './AdminEditProduct';
 import Swal from 'sweetalert2';
 import SummaryApi from '../common';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 import DisplayImage from './DisplayImage';
+
 const AllProductTable = ({
   onClose,
   data,
@@ -15,6 +16,7 @@ const AllProductTable = ({
   const [editProduct, setEditProduct] = useState(null); // Store the product being edited
   const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
   const [fullScreenImage, setFullScreenImage] = useState("");
+
   const handleDeleteProduct = async () => {
     const productId = data._id;
 
@@ -23,7 +25,7 @@ const AllProductTable = ({
       toast.error("Product ID is not available.");
       return;
     }
-  
+
     // Show confirmation dialog using SweetAlert2
     const result = await Swal.fire({
       title: 'Are you sure?',
@@ -34,7 +36,7 @@ const AllProductTable = ({
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     });
-  
+
     if (result.isConfirmed) {
       try {
         const response = await fetch(`${SummaryApi.deleteProduct.url}/${productId}`, {
@@ -44,11 +46,11 @@ const AllProductTable = ({
             "Content-Type": "application/json"
           }
         });
-  
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-  
+
         const responseData = await response.json();
         if (responseData.success) {
           Swal.fire({
@@ -84,14 +86,14 @@ const AllProductTable = ({
           <img
             src={data?.productImage[0]}
             alt={data.productName}
-            className=" w-20 h-20 object-cover"
+            className="w-20 h-20 object-cover"
             onClick={() => {
               setOpenFullScreenImage(true);
               setFullScreenImage(data?.productImage[0]);
             }}
           />
         </td>
-        <td className="border border-yellow-700 p-2 truncate w-20 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap text-center">
+        <td className="border bg-yellow-200 border-yellow-700 p-2 truncate w-20 max-w-xs overflow-hidden text-ellipsis whitespace-nowrap text-center">
           {data?.productName}
         </td>
         <td className='border border-yellow-700 p-2 text-center'>{data?.category}</td>
@@ -99,47 +101,45 @@ const AllProductTable = ({
         <td className='border border-yellow-700 p-2 text-center'>{data?.quantity}</td>
         <td className='border border-yellow-700 p-2 text-center items-center'>
           <div className='flex justify-center'>
-          {data?.available ? 
-             <MdCheckCircle className="text-green-500 text-3xl " /> 
-             : 
-             <MdCancel className="text-red-500 text-3xl" />}
+            {data?.available ? 
+               <MdCheckCircle className="text-green-500 text-3xl " /> 
+               : 
+               <MdCancel className="text-red-500 text-3xl" />}
           </div>
-         
         </td>
-
-
         <td className='border border-yellow-700 p-2 text-center'>
           <div className='flex justify-center gap-4'>
             <button
               className='w-fit p-3 bg-green-100 hover:bg-green-600 rounded-full hover:text-white cursor-pointer text-xl'
-              onClick={() => setEditProduct(data)}     >
+              onClick={() => setEditProduct(data)}>
               <MdModeEdit />
             </button>
             <button
               className='w-fit p-3 bg-red-100 hover:bg-red-600 rounded-full hover:text-white cursor-pointer text-xl'
-              onClick={handleDeleteProduct}   >
+              onClick={handleDeleteProduct}>
               <MdDelete />
             </button>
           </div>
-      </td>
-
+        </td>
       </tr>
 
       {/* Edit Product Modal */}
       {editProduct && (
-        <AdminEditProduct
-          productData={editProduct}
-          onClose={() => setEditProduct(null)} // Properly passed as a function
-          fetchdata={fetchdata}
-        />
+        <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50">
+          <AdminEditProduct
+            productData={editProduct}
+            onClose={() => setEditProduct(null)} // Properly passed as a function
+            fetchdata={fetchdata}
+          />
+        </div>
       )}
 
-             {/***display image full screen */}
-    {
-     openFullScreenImage && (
-       <DisplayImage onClose={()=>setOpenFullScreenImage(false)} imgUrl={fullScreenImage}/>
-     )
-    }
+      {/* Display image fullscreen */}
+      {openFullScreenImage && (
+        <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-75">
+          <DisplayImage onClose={() => setOpenFullScreenImage(false)} imgUrl={fullScreenImage} />
+        </div>
+      )}
     </>
   );
 };

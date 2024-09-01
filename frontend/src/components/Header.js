@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import Logo from './Logo'
+
 import { IoSearchSharp } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
@@ -10,13 +10,10 @@ import { toast } from 'react-toastify';
 import { setUserDetails } from '../store/userSlice';
 import ROLE from '../common/role';
 import Context from '../context';
-import image1 from '../assest/325398375_559071516095120_8785059472683896725_n.jpg'
+import Logo from '../assest/logo.png'
 const Header = () => {
-  const [currentImage,setCurrentImage] = useState(0)
-  const LogoIMG = [
-      image1,
-  
-  ]
+ 
+
   const user = useSelector(state => state?.user?.user)
   const dispatch = useDispatch()
 
@@ -72,10 +69,8 @@ const Header = () => {
     <header className='h-16 shadow-md bg-white fixed w-full z-40'>
         <div className='h-full container mx-auto flex items-center px-4 justify-between'>
             <Link to={'/'} className='w-10 h-10'>
-              <img src={LogoIMG[currentImage]} alt="logo"/>
-                {/* <Link to={'/'}>
-                  <Logo w= {90} h={50}/>
-                </Link> */}
+              <img src={Logo} alt="logo"/>
+              
 
             </Link>
 
@@ -118,7 +113,7 @@ const Header = () => {
 
                             {
                               user?.role === ROLE.ADMIN && (
-                                <Link to={'/admin-panel/all-products'} className='whitespace-nowrap hidden md:block
+                                <Link to={'/admin/all-products'} className='whitespace-nowrap hidden md:block
                                 hover:bg-slate-100 p-2'  onClick= {()=>setMenuDisplay(preve => !preve)}
                                 >Admin Panel</Link>
                               )

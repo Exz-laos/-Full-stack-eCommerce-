@@ -19,23 +19,24 @@ const AllProducts = () => {
   }, []);
 
   return (
-    <div>
-      <div className='lao-text bg-white py-2 px-4 flex justify-between items-center'>
-        <h2 className='font-bold text-lg'>ສິນຄ້າທັງໝົດ</h2>
+    <div className='overflow-x-hidden '>
+      <div className='lao-text bg-yellow-700 py-2 px-4 flex justify-between items-center '>
+        <h2 className='font-bold text-lg text-slate-100'>ສິນຄ້າທັງໝົດ</h2>
         <button
-          className='lao-text border-2 border-yellow-600 text-yellow-600 hover:bg-yellow-600
+          className='lao-text bg-blue-500 border-2 border-blue-600 text-slate-100 hover:bg-blue-600
              hover:text-white transition-all py-1 px-3 rounded-full'
           onClick={() => setOpenUploadProduct(true)}
         >
-          ເພີ່ມສິນຄ້າ
+          <p className='font-extrabold'>+ ເພີ່ມສິນຄ້າ</p>
         </button>
-      </div>
+      </div> 
 
       {/* All product table */}
-      <div className='py-4 h-[calc(100vh-190px)] overflow-y-scroll'>
+      <div className='py-4 h-[calc(100vh-18px)] overflow-y-auto'>
+
         <table className='w-full border-collapse table-auto'>
           <thead>
-            <tr className='bg-yellow-700 text--black'>
+            <tr className='bg-yellow-700 text-slate-100'>
               <th className='lao-text border border-gray-200 p-2 w-5'>ຮູບພາບ</th>
               <th className='lao-text border border-gray-200 p-2'>ຊື່ສິນຄ້າ</th>
               <th className='lao-text border border-gray-200 p-2'>ປະເພດ</th>
