@@ -31,16 +31,17 @@ const UploadProduct = ({
       const [fullScreenImage,setFullScreenImage] = useState("")
   
 
-      const handleOnChange = (e)=>{
-        const { name, value} = e.target
-  
-        setData((preve)=>{
-          return{
-            ...preve,
-            [name]  : value
-          }
-        })
-    }
+ 
+
+    const handleOnChange = (e) => {
+      const { name, type, checked, value } = e.target;
+    
+      setData((prevData) => ({
+        ...prevData,
+        [name]: type === 'checkbox' ? checked : value
+      }));
+    };
+    
 
     const handleDescriptionChange = (value) => {
       setData((prev) => ({
@@ -283,16 +284,23 @@ const UploadProduct = ({
                 className='lao-text p-2 bg-slate-100 border rounded'
                 required
               />
-              <label htmlFor='available' className='mt-3 lao-text'>ສະຖານະ:</label>
-                    <select
-                        value={data.available}
+       
+
+                    <label htmlFor='available' className='mt-3 lao-text'>ສະຖານະ:</label>
+                    <div className='flex items-center'>
+                      <input
+                        type='checkbox'
+                        id='available'
                         name='available'
+                        checked={data.available}
                         onChange={handleOnChange}
                         className='p-2 bg-slate-100 border rounded'
-                    >
-                        <option value={true}>ສິນຄ້າມີພ້ອມສົ່ງ</option>
-                        <option value={false}>ບໍ່ມີສິນຄ້າພ້ອມສົ່ງ</option>
-                    </select>
+                      />
+                      <span className='ml-2 lao-text'>
+                        ພ້ອມສົ່ງ
+                      </span>
+                    </div>
+
 
               <button className='lao-text px-3 py-2 bg-yellow-600 text-white mb-10 hover:bg-yellow-700'>
                    ເພີ່ມສິນຄ້າ

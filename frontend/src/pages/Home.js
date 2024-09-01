@@ -11,11 +11,11 @@ const Home = () => {
        <BannerProduct/>
 
   
-       <HorizontalCardProduct category={"khoppha"} heading={"ຂອບພະຍອດນິຍົມ"}/>
-       <HorizontalCardProduct category={"saiykhor"} heading={"ສາຍຄໍຍອດນິຍົມ"}/>
+       <HorizontalCardProduct category={"ຂອບພະ"} heading={"ຂອບພະຍອດນິຍົມ"}/>
+       <HorizontalCardProduct category={"ຂອບພະຄຳອິຕາລີ"} heading={"ສາຍຄໍຍອດນິຍົມ"}/>
 
-       <VerticalCardProduct category={"khoppha"} heading={"ຂອບພະ"}/>
-       <VerticalCardProduct category={"camera"} heading={"ກ້ອງສ່ອງພະ"}/>
+       <VerticalCardProduct category={"ຂອບພະ"} heading={"ຂອບພະ"}/>
+       <VerticalCardProduct category={"ກ້ອງສ່ອງພະ"} heading={"ກ້ອງສ່ອງພະ"}/>
    
     </div>
   )

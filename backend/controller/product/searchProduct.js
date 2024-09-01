@@ -1,34 +1,38 @@
-const productModel = require("../../models/productModel")
+const productModel = require("../../models/productModel");
 
-const searchProduct = async(req,res)=>{
-    try{
-        const query = req.query.q 
+const searchProduct = async (req, res) => {
+    try {
+        const query = req.query.q;
 
-        const regex = new RegExp(query,'i','g')
+        // Create a case-insensitive regex for searching
+        const regex = new RegExp(query, 'i');
 
-        const product = await productModel.find({
-            "$or" : [
+        // Fetch products where productName or category matches the regex and ensure they are available
+        const products = await productModel.find({
+            "$and": [
                 {
-                    productName : regex
+                    "$or": [
+                        { productName: regex },
+                        { category: regex }
+                    ]
                 },
-                {
-                    category : regex
-                }
+                { available: true }
             ]
-        })
-        res.json({
-            data  : product ,
-            message : "Search Product list",
-            error : false,
-            success : true
-        })
-    }catch(err){
-        res.json({
-            message : err.message || err,
-            error : true,
-            success : false
-        })
-    }
-}
+        });
 
-module.exports = searchProduct
+        res.json({
+            data: products,
+            message: "Search Product list",
+            error: false,
+            success: true
+        });
+    } catch (err) {
+        res.status(400).json({
+            message: err.message || 'An error occurred while searching for products.',
+            error: true,
+            success: false
+        });
+    }
+};
+
+module.exports = searchProduct;

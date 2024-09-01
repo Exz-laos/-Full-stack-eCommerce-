@@ -1,23 +1,50 @@
-const productModel = require("../../models/productModel")
+// const productModel = require("../../models/productModel")
 
-const getCategoryWiseProduct = async(req,res)=>{
-    try{
-        const { category } = req?.body || req?.query
-        const product = await productModel.find({ category })
+// const getCategoryWiseProduct = async(req,res)=>{
+//     try{
+//         const { category } = req?.body || req?.query
+//         const product = await productModel.find({ category })
+
+//         res.json({
+//             data : product,
+//             message : "Product",
+//             success : true,
+//             error : false
+//         })
+//     }catch(err){
+//         res.status(400).json({
+//             message : err.message || err,
+//             error : true,
+//             success : false
+//         })
+//     }
+// }
+
+// module.exports = getCategoryWiseProduct
+
+const productModel = require("../../models/productModel");
+
+const getCategoryWiseProduct = async (req, res) => {
+    try {
+        // Extract category from query or body
+        const { category } = req?.body || req?.query;
+
+        // Fetch only available products within the specified category
+        const products = await productModel.find({ category, available: true });
 
         res.json({
-            data : product,
-            message : "Product",
-            success : true,
-            error : false
-        })
-    }catch(err){
+            data: products,
+            message: "Available Products in Category",
+            success: true,
+            error: false
+        });
+    } catch (err) {
         res.status(400).json({
-            message : err.message || err,
-            error : true,
-            success : false
-        })
+            message: err.message || err,
+            error: true,
+            success: false
+        });
     }
-}
+};
 
-module.exports = getCategoryWiseProduct
+module.exports = getCategoryWiseProduct;
