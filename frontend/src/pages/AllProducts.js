@@ -5,6 +5,7 @@ import AllProductTable from '../components/AdminProductTable';
 
 const AllProducts = () => {
   const [openUploadProduct, setOpenUploadProduct] = useState(false);
+  
   const [allProduct, setAllProduct] = useState([]);
 
   const fetchAllProduct = async () => {
@@ -17,6 +18,13 @@ const AllProducts = () => {
   useEffect(() => {
     fetchAllProduct();
   }, []);
+
+
+
+
+
+
+  
 
   return (
     <div className='overflow-x-hidden '>
@@ -54,11 +62,21 @@ const AllProducts = () => {
         </table>
       </div>
 
+
+
+
+
       {/* Upload product component */}
       {openUploadProduct && (
         <UploadProduct onClose={() => setOpenUploadProduct(false)} fetchData={fetchAllProduct} />
       )}
     </div>
+
+
+
+
+
+
   );
 };
 

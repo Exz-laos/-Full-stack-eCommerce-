@@ -108,6 +108,7 @@ import Cancel from '../pages/Cancel';
 import Success from '../pages/Success';
 import OrderPage from '../pages/OrderPage';
 
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -124,6 +125,7 @@ const router = createBrowserRouter([
             { path: 'success', element: <Success /> },
             { path: 'cancel', element: <Cancel /> },
             { path: 'order', element: <OrderPage /> },
+        
         ]
     },
     {

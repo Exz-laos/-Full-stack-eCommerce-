@@ -4,12 +4,42 @@ import Context from '../context'
 import displayKIPCurrency from '../helpers/displayCurrency'
 import { MdDelete } from "react-icons/md";
 import {loadStripe} from '@stripe/stripe-js';
+
+
+
+
+import UploadProduct from '../components/UploadProduct';
+
+
+
+
 const Cart = () => {
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(false)
-
+    const [openUploadProduct, setOpenUploadProduct] = useState(false);
     const context = useContext(Context)
     const loadingCart = new Array(context.cartProductCount).fill(null)
+
+
+
+
+    const [allProduct, setAllProduct] = useState([]);
+    const fetchAllProduct = async () => {
+      const response = await fetch(SummaryApi.allProduct.url);
+      const dataResponse = await response.json();
+  
+      setAllProduct(dataResponse?.data || []);
+    };
+  
+    useEffect(() => {
+      fetchAllProduct();
+    }, []);
+
+
+
+
+
+
 
     const fetchData = async() =>{
         const response = await fetch(SummaryApi.addToCartProductView.url,{
@@ -104,28 +134,7 @@ const Cart = () => {
         }
     }
 
-    // const handlePayment  = async () => {
-   
-    //     // recreating the `Stripe` object on every render.
-    //     const stripePromise = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-    //     const response = await fetch(SummaryApi.payment.url,{
-    //         method : SummaryApi.payment.method,
-    //         credentials : 'include',
-    //         headers : {
-    //             "content-type" : 'application/json'
-    //         },   
-    //         body: JSON.stringify({
-    //             cartItems : data
-    //         })
-    //      }
-    //     )
-    //     const responseData = await response.json()
-
-    //     if(responseData?.id){
-    //         stripePromise.redirectToCheckout({seasionId : responseData.id})
-    //     }
-    //     console.log("payment response: ", responseData)
-    // }
+  
    
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY); // Initialize Stripe once
 
@@ -193,43 +202,7 @@ const handlePayment = async () => {
                     ) :(
 
 
-                        // data.map((product,index)=>{
-                        //     return(
-                        //      <div key={product?._id+"Add To Cart Loading"} className='w-full bg-white h-40 my-2 border border-slate-300  rounded grid grid-cols-[128px,1fr]'>
-                        //           <div className='w-40 h-40 bg-slate-200'>
-                        //                <img src={product?.productId?.productImage[0]} 
-                        //                className='w-full h-full object-scale-down mix-blend-multiply'/>
-                        //          </div>
-                        //     <div className='px-10 py-2 relative'>
-                        //           {/**delete product */}
-                        //           <div className='absolute right-0 text-red-600 rounded-full p-2 hover:bg-red-600 hover:text-white cursor-pointer'
-                        //           onClick={()=>deleteCartProduct(product?._id)} >
-                        //                 <MdDelete/>
-                        //             </div>
-
-                        //          {/**detail product */}
-                        //          <h2 className='text-lg lg:text-xl text-ellipsis line-clamp-1'>
-                        //             {product?.productId?.productName}</h2>
-
-                        //          <p className='capitalize text-slate-500'>{product?.productId.category}</p>
-                        //             <div className='flex flex-col lg:flex-row justify-between'>
-                        //                     <p className='text-red-600 font-medium text-lg'>
-                        //                      {displayKIPCurrency(product?.productId?.sellingPrice)}</p>
-                        //                     <p className='text-slate-600 font-semibold text-lg'> {displayKIPCurrency(product?.productId?.sellingPrice  * product?.quantity)}</p>
-                        //             </div>
-                                    
-                        //             <div className='flex items-center gap-3 mt-1'>
-                        //                 <button className='border border-red-600 text-red-600 hover:bg-red-600 hover:text-white w-6 h-6 flex justify-center items-center rounded '  onClick={()=>decraseQty(product?._id,product?.quantity)}>-</button>
-                        //                 <span>{product?.quantity}</span>
-                        //                 <button className='border border-red-600 text-red-600 hover:bg-red-600 hover:text-white w-6 h-6 flex justify-center items-center rounded '
-                        //                 onClick={()=>increaseQty(product?._id,product?.quantity)}>+</button>
-                        //             </div>
-                        //      </div>
-                                 
-                                   
-                        //      </div>
-                        //     )
-                        //    })
+                       
                         data.map((product, index) => {
                             return (
                                 <div key={product?._id + "Add To Cart Loading"} className='w-full bg-white h-40 my-2 border border-slate-300 rounded grid grid-cols-[128px,1fr]'>
@@ -303,12 +276,42 @@ const handlePayment = async () => {
                                 <p>{displayKIPCurrency(totalPrice)}</p>    
                             </div>
 
-                            <button className='bg-blue-600 p-2 text-white w-full mt-2'
-                            onClick={handlePayment}>Payment</button>
+
+
+
+                            {/* <button className='bg-blue-600 p-2 text-white w-full mt-2'
+                            onClick={handlePayment}>Payment</button> */}
+
+
+
+
+
+
+
+
+
+
+                          <button
+                            className='lao-text bg-blue-500 border-2 border-blue-600 text-slate-100 hover:bg-blue-600
+                                hover:text-white transition-all py-1 px-3 rounded-full'
+                            onClick={() => setOpenUploadProduct(true)}
+                            >
+                            <p className='font-extrabold'>+ ເພີ່ມສິນຄ້າ</p>
+                            </button>
 
                         </div>
                         )
                     }
+
+
+
+
+
+
+                       {/* Upload product component */}
+          {openUploadProduct && (
+        <UploadProduct onClose={() => setOpenUploadProduct(false)} fetchData={fetchAllProduct} />
+      )}
                  </div>
                 )
                }

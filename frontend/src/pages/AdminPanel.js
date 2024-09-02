@@ -18,7 +18,7 @@ const AdminPanel = () => {
     <div className='min-h-screen flex'>
       <aside className='bg-yellow-700 min-h-full w-60 customShadow'>
         <div className='h-32 flex justify-center items-center flex-col'>
-          <div className='text-5xl cursor-pointer relative flex justify-center'>
+          <Link to={'/'} className='text-5xl cursor-pointer relative flex justify-center'>
             {
               user?.profilePic ? (
                 <img src={user?.profilePic} className='w-20 h-20 rounded-full' alt={user?.name} />
@@ -26,7 +26,7 @@ const AdminPanel = () => {
                 <FaRegUserCircle />
               )
             }
-          </div>
+          </Link >
           <p className='capitalize text-lg font-semibold'>{user?.name}</p>
           <p className='text-sm'>{user?.role}</p>
         </div>

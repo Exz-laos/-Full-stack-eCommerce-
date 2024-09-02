@@ -70,8 +70,7 @@ const Header = () => {
         <div className='h-full container mx-auto flex items-center px-4 justify-between'>
             <Link to={'/'} className='w-10 h-10'>
               <img src={Logo} alt="logo"/>
-              
-
+            
             </Link>
 
             <div className='hidden lg:flex items w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>

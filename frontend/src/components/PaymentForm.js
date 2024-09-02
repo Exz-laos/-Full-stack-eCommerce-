@@ -1,3 +1,77 @@
+// import React from 'react'
+
+// const PaymentForm = () => {
+//   return (
+//     <div>
+//            <table className="table table-bordered table-striped">
+//             <thead>
+//                 <tr>
+//                     <th>name</th>
+//                     <th className="text-end">price</th>
+//                     <th className="text-end">quantity</th>
+//                     <th width="60px"></th>
+//                 </tr>
+//             </thead>
+//             <tbody>
+               
+//                     <tr>
+//                         <td></td>
+//                         <td className="text-end"></td>
+//                         <td className="text-end">1</td>
+//                         <td className="text-center">
+//                             <button className="btn btn-danger">
+//                                 <i className="fa fa-times"></i>
+
+//                             </button>
+//                         </td>
+//                     </tr>
+             
+//             </tbody>
+//         </table>
+//         <div className="text-center">
+//             ຈຳນວນ ລວມເປັນເງິນ  KIP
+//         </div>
+
+//         <div className="mt-3">
+//                <div className="alert alert-info">
+//                     <div className="text-center">Please tranfer money to BCEL bank account</div>
+//                     <div className="text-center">MR THANONGPHONE ANOTHAY</div>
+//                     <div className="text-center">2783712983701</div>
+//                 </div>
+//                 <div>
+//                     <div>Name</div>
+//                     <input className="form-control "  type="text"/>
+//                 </div>
+//                 <div className="mt-3">
+//                     <div>Tel</div>
+//                     <input className="form-control " type="text"/>
+//                 </div>
+//                 <div className="mt-3">
+//                     <div>Village,City,Province</div>
+//                     <input className="form-control " type="text" />
+//                 </div>
+//                 <div className="mt-3">
+//                     <div>Money transfer date</div>
+//                     <input className="form-control " type="date" />
+//                 </div>
+//                 <div className="mt-3">
+//                     <div>Money transfer time</div>
+//                     <input className="form-control " type="time"  />
+//                 </div>
+
+//                 <button className="btn btn-primary mt-3" > 
+//                     <i className="fa fa-check mr-2"> </i> Confirm Checkout
+//                 </button>
+//         </div>
+//     </div>
+//   )
+// }
+
+
+
+// export default PaymentForm
+
+
 import React, { useState } from 'react'
 import { CgClose } from "react-icons/cg";
 import productCategory from '../helpers/productCategory';
@@ -9,7 +83,7 @@ import SummaryApi from '../common';
 import Swal from 'sweetalert2';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
-const UploadProduct = ({
+const PaymentForm = ({
     onClose,
     fetchData
     
@@ -132,8 +206,8 @@ const UploadProduct = ({
 
 
   return (
-    <div className='lao-text fixed w-full h-full bg-gray-500 bg-opacity-60
-         top-0 left-0 right-0 bottom-0 flex justify-center items-center '>
+    <div className='lao-text fixed w-full h-full bg-slate-200 bg-opacity-35
+         top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
       <div  className='bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden'>
 
             <div className='flex justify-between items-center pb-3'>
@@ -323,4 +397,4 @@ const UploadProduct = ({
   )
 }
 
-export default UploadProduct
+export default PaymentForm
