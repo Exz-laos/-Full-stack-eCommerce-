@@ -4,7 +4,7 @@ import Logo from '../assest/logo.png'; // Ensure the path and format are correct
 
 const Footer = () => {
   return (
-    <footer className='bg-yellow-600'>
+    <footer className='bg-yellow-100'>
       <div className='container mx-auto p-4'>
         {/* Flex container for horizontal alignment on desktop and vertical on mobile */}
         <div className='flex flex-col md:flex-row md:items-start md:justify-between'>

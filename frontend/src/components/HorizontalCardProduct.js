@@ -100,13 +100,13 @@ const HorizontalCardProduct = ({category, heading}) => {
                       <p className='capitalize text-slate-500'>{product?.category}</p>
 
                             <div>
-                                <p className='text-yellow-600 font-medium'>
+                                <p className='text-black font-medium'>
                                     { displayKIPCurrency(product?.sellingPrice) }</p>
                                 <p className='text-xs text-slate-500 line-through px-2'>
                                     { displayKIPCurrency(product?.price)  }</p>
                             </div>
-                            <button className='text-sm bg-yellow-600 hover:bg-yellow-700
-                             text-white px-3 py-0.5 rounded-full' 
+                            <button className='text-sm bg-yellow-100 hover:bg-yellow-200
+                             text-black px-3 py-0.5 rounded-full' 
                               onClick={(e) => handleAddToCart(e,product?._id)}>
                                 Add to Cart
                             </button>

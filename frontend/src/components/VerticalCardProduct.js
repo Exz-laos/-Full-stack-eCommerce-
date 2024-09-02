@@ -102,13 +102,13 @@ const VerticalCardProduct = ({category, heading}) => {
                       <p className='capitalize text-slate-500'>{product?.category}</p>
 
                             <div className='flex'>
-                                <p className='text-2xl text-yellow-600 font-medium'>
+                                <p className='text-2xl text-black font-medium'>
                                     { displayKIPCurrency(product?.sellingPrice) }</p>
                                 <p className='text-base text-slate-500 line-through px-3 py-4'>
                                     { displayKIPCurrency(product?.price)  }</p>
                             </div>
-                            <button className='text-sm bg-yellow-600 hover:bg-yellow-700
-                             text-white px-3 py-0.5 rounded-full' 
+                            <button className='text-sm bg-yellow-200 hover:bg-yellow-700
+                             text-black px-3 py-0.5 rounded-full' 
                              onClick={(e) => handleAddToCart(e,product?._id)} >
                                 Add to Cart
                             </button>

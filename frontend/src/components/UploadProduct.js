@@ -180,6 +180,7 @@ const UploadProduct = ({
                           })
                        }        
                     </select>
+                    
                 {/* Product Image */}
                 <label htmlFor='productImage' className='mt-3'>ຮູບພາບສິນຄ້າ :</label>
                  <label htmlFor='uploadImageInput'>
