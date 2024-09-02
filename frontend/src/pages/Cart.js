@@ -83,8 +83,7 @@ const Cart = () => {
         }
     };
 
-    // State to hold the selected product
-    const [selectedProduct, setSelectedProduct] = useState(null);
+  
 
     const handlePaymentClick = () => {
         setOpenUploadProduct(true);  // Open the payment detail modal

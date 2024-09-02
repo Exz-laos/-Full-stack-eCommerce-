@@ -8,7 +8,8 @@ import SummaryApi from '../common';
 import Swal from 'sweetalert2';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 import displayKIPCurrency from '../helpers/displayCurrency';
-
+import { FaWhatsapp } from 'react-icons/fa';
+import ReactDOMServer from 'react-dom/server';
 const UploadPaymentDetail = ({
     onClose,
     fetchData,
@@ -77,9 +78,56 @@ const UploadPaymentDetail = ({
         }));
     };
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+      
+    //     try {
+    //         const response = await fetch(SummaryApi.uploadPaymentForm.url, {
+    //             method: SummaryApi.uploadPaymentForm.method,
+    //             credentials: 'include',
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify(data)
+    //         });
+      
+    //         const responseData = await response.json();
+      
+    //         if (response.ok && responseData.success) {
+    //             Swal.fire({
+    //                 title: 'ສຳເລັດ!',
+    //                 text: responseData.message,
+    //                 icon: 'success',
+    //                 showConfirmButton: true,
+    //                 willClose: () => {
+    //                     onClose();
+    //                     fetchData();
+    //                 }
+    //             });
+    //         } else {
+    //             Swal.fire({
+    //                 title: 'Error!',
+    //                 text: responseData.message || 'Failed to upload the payment form.',
+    //                 icon: 'error',
+                   
+    //                 showConfirmButton: true,
+    //             });
+    //         }
+    //     } catch (error) {
+    //         console.error('Upload payment form error:', error);
+    //         Swal.fire({
+    //             title: 'Error!',
+    //             text: 'An error occurred while uploading the payment form.',
+    //             icon: 'error',
+    //             showConfirmButton: true
+    //         });
+    //     }
+    // };
+
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-      
+    
         try {
             const response = await fetch(SummaryApi.uploadPaymentForm.url, {
                 method: SummaryApi.uploadPaymentForm.method,
@@ -89,15 +137,26 @@ const UploadPaymentDetail = ({
                 },
                 body: JSON.stringify(data)
             });
-      
+    
             const responseData = await response.json();
-      
+    
             if (response.ok && responseData.success) {
+                // Convert the React icon component to an HTML string
+                const whatsappLinkHtml = ReactDOMServer.renderToStaticMarkup(
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                        <a href='https://wa.me/+8562055698289' target='_blank' rel='noopener noreferrer'     style={{ textDecoration: 'none', color: '#25D366', textAlign: 'center' }}>
+                            <FaWhatsapp size={60} /> {/* Larger and green WhatsApp icon */}
+                            <p style={{ marginTop: '10px', textAlign: 'center'  }}>ກົດບ່ອນນີ້ເພື່ອຮັບບິນສົ່ງເຄື່ອງ</p>
+                        </a>
+                    </div>
+                );
+    
                 Swal.fire({
                     title: 'ສຳເລັດ!',
                     text: responseData.message,
                     icon: 'success',
-                    showConfirmButton: true,
+                    showConfirmButton: false, // Hide the OK button
+                    footer: whatsappLinkHtml,  // Use the HTML string here
                     willClose: () => {
                         onClose();
                         fetchData();
@@ -108,7 +167,6 @@ const UploadPaymentDetail = ({
                     title: 'Error!',
                     text: responseData.message || 'Failed to upload the payment form.',
                     icon: 'error',
-                   
                     showConfirmButton: true,
                 });
             }
@@ -122,6 +180,7 @@ const UploadPaymentDetail = ({
             });
         }
     };
+    
 
        // Calculate total product cost
     const totalProductCost = cartItems.reduce((total, item) => {
@@ -327,7 +386,11 @@ const UploadPaymentDetail = ({
                                   data.bankslipImage.map((image, index) =>{
                                     return(
                                         <div className='relative' key={index}>
-                                        <img src={image} alt={`bankslip-${index}`} onClick={() => {
+                                        <img src={image} alt={`bankslip-${index}`}
+                                           width={120} 
+                                           height={120}  
+                                           className='bg-slate-100 border cursor-pointer'  
+                                            onClick={() => {
                                             setOpenFullScreenImage(true);
                                             setFullScreenImage(image);
                                         }} />
@@ -382,7 +445,14 @@ const UploadPaymentDetail = ({
                     <button type='submit' className='bg-blue-500 text-white p-2 rounded mt-4'>ອັບໂຫລດ</button>
                 </form>
             </div>
-            {openFullScreenImage && <DisplayImage src={fullScreenImage} onClose={() => setOpenFullScreenImage(false)} />}
+
+
+             {/* display image full screen */}
+            {
+                openFullScreenImage && (
+                <DisplayImage onClose={()=>setOpenFullScreenImage(false)} imgUrl={fullScreenImage}/>
+                )
+            }
         </div>
     );
 };

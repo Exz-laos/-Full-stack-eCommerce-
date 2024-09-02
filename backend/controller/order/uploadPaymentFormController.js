@@ -1,4 +1,5 @@
 const paymentFormModel = require("../../models/paymentFormModel");
+const addToCartModel = require("../../models/cartProductModel");
 
 async function uploadPaymentFormController(req, res) {
     try {
@@ -6,9 +7,15 @@ async function uploadPaymentFormController(req, res) {
         const uploadPaymentForm = new paymentFormModel(req.body);
         const savePaymentForm = await uploadPaymentForm.save();
 
+        // Get the user ID from the request
+        const currentUser = req.userId;
+
+        // Remove items from the cart for the current user
+        await addToCartModel.deleteMany({ userId: currentUser });
+
         // Send a successful response
         res.status(201).json({
-            message: "ຟອມຊຳລະເງິນຖືກບັນທຶກສໍາເລັດແລ້ວ",
+            message: "ພວກເຮົາກຳລັງກວດສອບການຊຳລະເງິນຂອງທ່ານ..! ກົດໄປຍັງວັອດແອັບເພື່ອຮັບບິນຝາກເຄື່ອງ",
             error: false,
             success: true,
             data: savePaymentForm

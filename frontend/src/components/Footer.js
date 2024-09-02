@@ -41,7 +41,7 @@ const Footer = () => {
                 <a href='https://www.facebook.com/savannkoppha' target='_blank' rel='noopener noreferrer' className='text-blue-400 mr-4'>
                   <FaFacebook size={30} />
                 </a>
-                <a href='https://api.whatsapp.com/send?phone=%2B8562055698289&app=facebook&entry_point=page_cta&fbclid=IwY2xjawFBP0NleHRuA2FlbQIxMAABHfvq9R2NnHzD8px4nxx5rnHX2K2Z7ymHSZw3n5lkaOoZmOmisTwxmyAlMQ_aem_sjTlyc_DpCYOlYgvoelSCg' target='_blank' rel='noopener noreferrer' className='text-green-400'>
+                <a href='https://wa.me/+8562055698289' target='_blank' rel='noopener noreferrer' className='text-green-400'>
                   <FaWhatsapp size={30} />
                 </a>
               </div>
