@@ -17,6 +17,11 @@
 // module.exports = addToCartModel
 
 
+
+
+
+
+
 const mongoose = require('mongoose');
 
 const addToCartSchema = new mongoose.Schema({
@@ -41,3 +46,24 @@ const addToCartSchema = new mongoose.Schema({
 const addToCartModel = mongoose.model('AddToCart', addToCartSchema);
 
 module.exports = addToCartModel;
+
+
+// const mongoose = require('mongoose');
+
+// const addToCartSchema = new mongoose.Schema({
+//     productId: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'Product', // Reference to the Product model
+//         required: true
+//     },
+//     quantity: {
+//         type: Number,
+//         required: true
+//     }
+// }, {
+//     timestamps: true
+// });
+
+// const addToCartModel = mongoose.model('AddToCart', addToCartSchema);
+
+// module.exports = addToCartModel;

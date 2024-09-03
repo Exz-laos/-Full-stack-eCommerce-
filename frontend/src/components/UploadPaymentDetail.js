@@ -34,23 +34,27 @@ const UploadPaymentDetail = ({
 
     const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
     const [fullScreenImage, setFullScreenImage] = useState("");
+ 
+
     useEffect(() => {
         // Get current date and time
         const now = new Date();
-
+    
         // Format date as YYYY-MM-DD
         const currentDate = now.toISOString().split('T')[0];
-
+    
         // Format time as HH:MM
         const currentTime = now.toTimeString().split(' ')[0].slice(0, 5);
-
+    
         // Set the default values
         setData(prevData => ({
             ...prevData,
             payDate: currentDate,
-            payTime: currentTime
+            payTime: currentTime,
+            cartItems: cartItems  // Initialize cartItems in state
         }));
-    }, []);
+    }, [cartItems]);
+    
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
@@ -80,8 +84,6 @@ const UploadPaymentDetail = ({
         }));
     };
 
-   
-    
     const handleSubmit = async (e) => {
         e.preventDefault();
     
@@ -92,7 +94,7 @@ const UploadPaymentDetail = ({
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({ ...data, cartItems }) // Include cartItems here
             });
     
             const responseData = await response.json();
@@ -101,9 +103,9 @@ const UploadPaymentDetail = ({
                 // Convert the React icon component to an HTML string
                 const whatsappLinkHtml = ReactDOMServer.renderToStaticMarkup(
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                        <a href='https://wa.me/+8562055698289' target='_blank' rel='noopener noreferrer'     style={{ textDecoration: 'none', color: '#25D366', textAlign: 'center' }}>
+                        <a href='https://wa.me/+8562055698289' target='_blank' rel='noopener noreferrer' style={{ textDecoration: 'none', color: '#25D366', textAlign: 'center' }}>
                             <FaWhatsapp size={60} /> {/* Larger and green WhatsApp icon */}
-                            <p style={{ marginTop: '10px', textAlign: 'center'  }}>ກົດບ່ອນນີ້ເພື່ອຮັບບິນສົ່ງເຄື່ອງ</p>
+                            <p style={{ marginTop: '10px', textAlign: 'center' }}>ກົດບ່ອນນີ້ເພື່ອຮັບບິນສົ່ງເຄື່ອງ</p>
                         </a>
                     </div>
                 );
@@ -139,6 +141,8 @@ const UploadPaymentDetail = ({
     };
     
 
+    
+
        // Calculate total product cost
     const totalProductCost = cartItems.reduce((total, item) => {
         return total + item?.productId?.sellingPrice * item.quantity;
@@ -161,15 +165,17 @@ const UploadPaymentDetail = ({
               
 
 
-                
-
+    
 
                 <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
 
 
+
+
                        {/* Display Selected Products */}
                        <div>
-                        <h3 className='font-bold text-lg'>Selected Products:</h3>
+                    <label htmlFor="cartItems">Selected Products:</label>
+                        <input/>
                         {cartItems.length > 0 ? (
                             cartItems.map((item, index) => (
                                 <div key={index} className='flex justify-between items-center border-b py-2'>
@@ -205,6 +211,9 @@ const UploadPaymentDetail = ({
                     </div>
 
                       
+
+
+
 
 
 

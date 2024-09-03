@@ -1,4 +1,4 @@
-const paymentFormModel = require('../../models/paymentFormModel.js');
+const paymentFormModel = require('../../models/paymentFormModel');
 
 // Controller to update order status
 const updateOrderStatusController = async (req, res) => {

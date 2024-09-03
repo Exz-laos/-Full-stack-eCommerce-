@@ -95,7 +95,12 @@ const SummaryApi ={
     updateOrderStatus: {
         url: (orderId, status) => `${backendDomain}/api/orders/${orderId}/${status}`,
         method: 'PUT'
+    },
+    getItemDetails: {
+        url: (itemId) => `${backendDomain}/api/items/${itemId}`,
+        method: 'GET'
     }
+
 
 
     

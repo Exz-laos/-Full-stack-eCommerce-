@@ -7,8 +7,27 @@ import { FaEye } from "react-icons/fa";
 
 const AllOrders = () => {
     const [allOrders, setAllOrders] = useState([]);
-    const [selectedOrder, setSelectedOrder] = useState(null); // State to store the selected order
+    const [selectedOrder, setSelectedOrder] = useState(null); // For storing the selected order details
+    const [openOrderDetail, setOpenOrderDetail] = useState(false);
+   
 
+    // const fetchAllOrders = async () => {
+    //     try {
+    //         const response = await fetch(SummaryApi.allOrders.url, {
+    //             method: SummaryApi.allOrders.method,
+    //             credentials: 'include',
+    //         });
+    //         const data = await response.json();
+
+    //         if (data.success) {
+    //             setAllOrders(data.data);
+    //         } else {
+    //             toast.error(data.message);
+    //         }
+    //     } catch (error) {
+    //         toast.error("Failed to fetch orders. Please try again.");
+    //     }
+    // };
     const fetchAllOrders = async () => {
         try {
             const response = await fetch(SummaryApi.allOrders.url, {
@@ -16,7 +35,9 @@ const AllOrders = () => {
                 credentials: 'include',
             });
             const data = await response.json();
-
+    
+            console.log(data);  // Check if cartItems are populated correctly
+    
             if (data.success) {
                 setAllOrders(data.data);
             } else {
@@ -26,6 +47,9 @@ const AllOrders = () => {
             toast.error("Failed to fetch orders. Please try again.");
         }
     };
+    
+
+
 
     const updateOrderStatus = async (orderId, newStatus) => {
         try {
@@ -153,9 +177,14 @@ const AllOrders = () => {
         return <div className="badge bg-secondary">Unknown</div>;
     };
 
-    const handleViewDetails = (order) => {
-        setSelectedOrder(order); // Set the selected order
+    const handleSeeOrderDetail = (order) => {
+        console.log(order); // Check if cartItems are present and populated
+        setSelectedOrder(order);
+        setOpenOrderDetail(true);
     };
+    
+
+  
 
     useEffect(() => {
         fetchAllOrders();
@@ -210,29 +239,41 @@ const AllOrders = () => {
                                 </button>
                             </td>
                             <td>
-                                <FaEye className="cursor-pointer" onClick={() => handleViewDetails(order)} />
+                                <FaEye className="cursor-pointer" onClick={() => handleSeeOrderDetail(order)} />
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
-            {selectedOrder && (
-                <div className="modal">
-                    <h2>Order Details</h2>
-                    <p><strong>Name:</strong> {selectedOrder.customerName} {selectedOrder.customerSurname}</p>
-                    <p><strong>Phone:</strong> {selectedOrder.customerPhone}</p>
-                    <p><strong>Whatsapp:</strong> {selectedOrder.customerWhatsapp}</p>
-                    <p><strong>Shipping Choice:</strong> {selectedOrder.shippingChoiceName}</p>
-                    <p><strong>Payment Date:</strong> {moment(selectedOrder.payDate).format('L')}</p>
-                    <p><strong>Payment Time:</strong> {selectedOrder.payTime}</p>
-                    <p><strong>Status:</strong> {displayStatusText(selectedOrder.status)}</p>
-                    <p><strong>Note:</strong> {selectedOrder.note}</p>
-                    <p><strong>Cart Items:</strong> {selectedOrder.cartItems.length}</p>
-                    {/* Additional details can be added here */}
-                    <button onClick={() => setSelectedOrder(null)}>Close</button>
+ {/* Order Detail Modal */}
+ {openOrderDetail && selectedOrder && (
+                <div className="order-details-modal">
+                    <h2>Order Details for {selectedOrder.customerName} {selectedOrder.customerSurname}</h2>
+                    <p>Whatsapp: {selectedOrder.customerWhatsapp}</p>
+                    <p>Pay Date: {moment(selectedOrder.payDate).format('L')}</p>
+                    <p>Pay Time: {selectedOrder.payTime}</p>
+                    <p>Status: {displayStatusText(selectedOrder.status)}</p>
+                    <h3>Cart Items</h3>
+                    <ul>
+                        {selectedOrder.cartItems && selectedOrder.cartItems.length > 0 ? (
+                            selectedOrder.cartItems.map((item, index) => (
+                                <li key={index}>
+                                    <p>Product Name: {item.productId.productName}</p>
+                                    <p>Quantity: {item.quantity}</p>
+                                    <p>Price: {item.productId.price}</p>
+                                </li>
+                            ))
+                        ) : (
+                            <p>No items found in the cart.</p>
+                        )}
+                    </ul>
+                    <button onClick={() => setOpenOrderDetail(false)}>Close</button>
                 </div>
             )}
+
+
+
         </div>
     );
 };
