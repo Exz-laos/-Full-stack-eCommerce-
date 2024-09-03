@@ -26,6 +26,8 @@ const searchProduct = require('../controller/product/searchProduct')
 const filterProductController = require('../controller/product/filterProduct')
 const deleteProductController = require('../controller/product/deleteProduct')
 const uploadPaymentFormController = require('../controller/order/uploadPaymentFormController')
+const getAllOrdersController = require('../controller/order/getAllOrdersController')
+const updateOrderStatusController = require('../controller/order/updateOrderStatusController')
 
 
 router.post("/signup",userSignUpController)
@@ -61,4 +63,7 @@ router.post("/delete-cart-product",authToken,deleteAddToCartProduct)
 //payment
 router.post("/uploadPaymentForm",authToken,uploadPaymentFormController)
 
+router.get('/all-orders',authToken, getAllOrdersController);
+// Route to update order status
+router.put('/orders/:orderId/:status',authToken, updateOrderStatusController);
 module.exports = router

@@ -87,7 +87,16 @@ const SummaryApi ={
     uploadPaymentForm: {
         url : `${backendDomain}/api/uploadPaymentForm` ,
         method: "post"
+    },
+    allOrders: {
+        url: `${backendDomain}/api/all-orders`,
+        method: "GET"
+    },
+    updateOrderStatus: {
+        url: (orderId, status) => `${backendDomain}/api/orders/${orderId}/${status}`,
+        method: 'PUT'
     }
+
 
     
 }

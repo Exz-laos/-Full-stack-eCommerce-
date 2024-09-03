@@ -1,72 +1,78 @@
 const mongoose = require('mongoose');
+const AddToCart = require('./cartProductModel'); // Ensure path is correct
 
 const paymentSchema = mongoose.Schema({
+    cartItems: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'AddToCart' 
+    }],
     customerName: {
         type: String,
-        required: [true, 'ກະລຸນາປ້ອນຊື່ລູກຄ້າ'] // "Please enter customer name" in Lao
+        required: [true, 'ກະລຸນາປ້ອນຊື່ລູກຄ້າ']
     },
     customerSurname: {
         type: String,
-        required: [true, 'ກະລຸນາປ້ອນນາມສະກຸນລູກຄ້າ'] // "Please enter customer surname" in Lao
+        required: [true, 'ກະລຸນາປ້ອນນາມສະກຸນລູກຄ້າ']
     },
     customerPhone: {
         type: Number,
         validate: {
             validator: function(v) {
-                const phoneString = v.toString(); // Convert number to string
-                return phoneString.length >= 8 && phoneString.length <= 10; // Validate length
+                const phoneString = v.toString();
+                return phoneString.length >= 7 && phoneString.length <= 15;
             },
-            message: props => `${props.value} ບໍ່ແມ່ນເບີໂທທີ່ຖືກຕ້ອງ! ມັນຄວນຈະມີ 8 ຫາ 10 ຕົວເລກ.` // "is not a valid phone number! It should have 8 to 10 digits." in Lao
+            message: props => `${props.value} ບໍ່ແມ່ນເບີໂທທີ່ຖືກຕ້ອງ! ມັນຄວນຈະມີ 7 ຫາ 15 ຕົວເລກ.`
         }
     },
     customerWhatsapp: {
         type: Number,
-        required: [true, 'ກະລຸນາປ້ອນເບີ WhatsApp'], // "Please enter WhatsApp number" in Lao
+        required: [true, 'ກະລຸນາປ້ອນເບີ WhatsApp'],
         validate: {
             validator: function(v) {
-                const whatsappString = v.toString(); // Convert number to string
-                return whatsappString.length >= 7 && whatsappString.length <= 12; // Validate length
+                const whatsappString = v.toString();
+                return whatsappString.length >= 7 && whatsappString.length <= 15;
             },
-            message: props => `${props.value} ບໍ່ແມ່ນເບີ WhatsApp ທີ່ຖືກຕ້ອງ! ມັນຄວນຈະມີ 8 ຫາ 10 ຕົວເລກ.` // "is not a valid WhatsApp number! It should have 8 to 10 digits." in Lao
+            message: props => `${props.value} ບໍ່ແມ່ນເບີ WhatsApp ທີ່ຖືກຕ້ອງ! ມັນຄວນຈະມີ 7 ຫາ 15 ຕົວເລກ.`
         }
     },
     shippingChoice: {
-        type: String, 
-        required: [true, 'ກະລຸນາເລືອກວິທີການຈັດສົ່ງ'] // "Please select a shipping choice" in Lao
+        type: String,
+        required: [true, 'ກະລຸນາເລືອກວິທີການຈັດສົ່ງ']
     },
     shippingChoiceName: {
-        type: String, 
-        required: [true, 'ກະລຸນາປ້ອນຊື່ວິທີການຈັດສົ່ງ'] // "Please enter shipping choice name" in Lao
-    },
-    bankName: {
-        type: String, 
-        required: [true, 'ກະລຸນາເລືອກຊື່ທະນາຄານ'] // "Please select a bank name" in Lao
+        type: String,
+        required: [true, 'ກະລຸນາປ້ອນຊື່ວິທີການຈັດສົ່ງ']
     },
     bankslipImage: {
-        type: [], // Assuming this stores image URLs or file paths
-        required: [true, 'ກະລຸນາອັບໂຫຼດສະລິບໂອນເງິນ'], // "Please upload the bank slip image" in Lao
+        type: [],
+        required: [true, 'ກະລຸນາອັບໂຫຼດສະລິບໂອນເງິນ'],
         validate: {
             validator: function(v) {
-                return v.length > 0; // Ensure that the array is not empty
+                return v.length > 0;
             },
-            message: 'ກະລຸນາອັບໂຫຼດສະລິບໂອນເງິນ' // "Please upload the bank slip image" in Lao
+            message: 'ກະລຸນາອັບໂຫຼດສະລິບໂອນເງິນ'
         }
     },
     payDate: {
-        type: Date, 
-        required: [true, 'ກະລຸນາປ້ອນວັນທີການຊຳລະ'] // "Please enter the payment date" in Lao
+        type: Date,
+        required: [true, 'ກະລຸນາປ້ອນວັນທີການຊຳລະ']
     },
     payTime: {
-        type: String, // Store time as a string or combine with Date
-        required: [true, 'ກະລຸນາປ້ອນເວລາການຊຳລະ'] // "Please enter the payment time" in Lao
+        type: String,
+        required: [true, 'ກະລຸນາປ້ອນເວລາການຊຳລະ']
     },
     note: {
         type: String,
     },
+    status: {
+        type: String,
+        default: "wait"
+    }
+  
 }, {
     timestamps: true
 });
 
-const paymentFormModel = mongoose.model('Payment detail', paymentSchema);
+const paymentFormModel = mongoose.model('PaymentDetail', paymentSchema);
 
 module.exports = paymentFormModel;

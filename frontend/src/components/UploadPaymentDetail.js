@@ -17,6 +17,7 @@ const UploadPaymentDetail = ({
 }) => {
     const SHIPPING_COST = 12000; // Default shipping cost
     const [data, setData] = useState({
+        cartItems: [],
         customerName: "",
         customerSurname: "",
         customerPhone: "",
@@ -28,6 +29,7 @@ const UploadPaymentDetail = ({
         payDate: "",
         payTime: "",
         note: "",
+    
     });
 
     const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
@@ -78,52 +80,7 @@ const UploadPaymentDetail = ({
         }));
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-      
-    //     try {
-    //         const response = await fetch(SummaryApi.uploadPaymentForm.url, {
-    //             method: SummaryApi.uploadPaymentForm.method,
-    //             credentials: 'include',
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             },
-    //             body: JSON.stringify(data)
-    //         });
-      
-    //         const responseData = await response.json();
-      
-    //         if (response.ok && responseData.success) {
-    //             Swal.fire({
-    //                 title: 'ສຳເລັດ!',
-    //                 text: responseData.message,
-    //                 icon: 'success',
-    //                 showConfirmButton: true,
-    //                 willClose: () => {
-    //                     onClose();
-    //                     fetchData();
-    //                 }
-    //             });
-    //         } else {
-    //             Swal.fire({
-    //                 title: 'Error!',
-    //                 text: responseData.message || 'Failed to upload the payment form.',
-    //                 icon: 'error',
-                   
-    //                 showConfirmButton: true,
-    //             });
-    //         }
-    //     } catch (error) {
-    //         console.error('Upload payment form error:', error);
-    //         Swal.fire({
-    //             title: 'Error!',
-    //             text: 'An error occurred while uploading the payment form.',
-    //             icon: 'error',
-    //             showConfirmButton: true
-    //         });
-    //     }
-    // };
-
+   
     
     const handleSubmit = async (e) => {
         e.preventDefault();
