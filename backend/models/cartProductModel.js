@@ -19,9 +19,6 @@
 
 
 
-
-
-
 const mongoose = require('mongoose');
 
 const addToCartSchema = new mongoose.Schema({
@@ -35,7 +32,7 @@ const addToCartSchema = new mongoose.Schema({
         required: true
     },
     userId: {
-        type: mongoose.Schema.Types.ObjectId, // Assuming you might reference a User schema
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     }
@@ -53,7 +50,7 @@ module.exports = addToCartModel;
 // const addToCartSchema = new mongoose.Schema({
 //     productId: {
 //         type: mongoose.Schema.Types.ObjectId,
-//         ref: 'Product', // Reference to the Product model
+//         ref: 'product', // Reference to the Product model
 //         required: true
 //     },
 //     quantity: {

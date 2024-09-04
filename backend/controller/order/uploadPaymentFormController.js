@@ -24,6 +24,9 @@ async function uploadPaymentFormController(req, res) {
         let errorMessage = err.message || err;
 
         // Translate common errors to Lao
+        if (errorMessage.includes('orderImage')) {
+            errorMessage = "ກະລຸນາອັບໂຫຼດຮູບລາຍການທີ່ທ່ານສັ່ງຊື້"; // "Please upload the bank slip image" in Lao
+        } 
         if (errorMessage.includes('bankslipImage')) {
             errorMessage = "ກະລຸນາອັບໂຫຼດສະລິບໂອນເງິນ"; // "Please upload the bank slip image" in Lao
         } 

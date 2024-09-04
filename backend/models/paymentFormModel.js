@@ -1,11 +1,20 @@
 const mongoose = require('mongoose');
 const AddToCart = require('./cartProductModel'); // Ensure path is correct
-
 const paymentSchema = mongoose.Schema({
     cartItems: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'AddToCart' 
     }],
+    orderImage: {
+        type: [],
+        required: [true, 'ກະລຸນາອັບໂຫຼດຮູບລາຍການທີ່ທ່ານສັ່ງຊື້'],
+        validate: {
+            validator: function(v) {
+                return v.length > 0;
+            },
+            message: 'ກະລຸນາອັບໂຫຼດຮູບລາຍການທີ່ທ່ານສັ່ງຊື້'
+        }
+    },
     customerName: {
         type: String,
         required: [true, 'ກະລຸນາປ້ອນຊື່ລູກຄ້າ']
