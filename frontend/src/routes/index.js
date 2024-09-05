@@ -14,8 +14,6 @@ import CategoryProduct from '../pages/CategoryProduct';
 import ProductDetails from '../pages/ProductDetails';
 import Cart from '../pages/Cart';
 import SearchProduct from '../pages/SearchProduct';
-import Cancel from '../pages/Cancel';
-import Success from '../pages/Success';
 import OrderPage from '../pages/OrderPage';
 import AllOrders from '../pages/AllOrders';
 
@@ -33,8 +31,6 @@ const router = createBrowserRouter([
             { path: 'product/:id', element: <ProductDetails /> },
             { path: 'cart', element: <Cart /> },
             { path: 'search', element: <SearchProduct /> },
-            { path: 'success', element: <Success /> },
-            { path: 'cancel', element: <Cancel /> },
             { path: 'order', element: <OrderPage /> },
         
         ]

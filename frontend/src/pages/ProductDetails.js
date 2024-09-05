@@ -95,7 +95,7 @@ const ProductDetails = () => {
 
 
   return (
-    <div className='container mx-auto p-4'>
+    <div className='lao-text container mx-auto p-4'>
         <div className='min-h-[200px] flex flex-col lg:flex-row gap-4'>
                {/***product Image */}
               <div className='h-96 flex flex-col lg:flex-row-reverse gap-4'>
@@ -206,6 +206,8 @@ const ProductDetails = () => {
                      <p className='text-yellow-600'>{displayKIPCurrency(data.sellingPrice)}</p>
                      <p className='text-slate-400 line-through'>{displayKIPCurrency(data.price)}</p>
                    </div>
+                   <p className='capitalize bg-yellow-100 w-fit text-slate-400'>ຍັງເຫຼືອພ້ອມສົ່ງ {data?.quantity} ອັນ</p>
+
                    <div className='flex items-center gap-3 my-2'>
                      <button className='border-2 border-yellow-600 rounded px-3 py-1 min-w-[120px]
                       text-yellow-600 font-medium hover:bg-yellow-600 hover:text-white'
@@ -216,7 +218,7 @@ const ProductDetails = () => {
                    </div>
             
                    <div>
-                        <p className='text-slate-600 font-medium my-1'>Description :</p>
+                        <p className='text-slate-600 font-medium my-1'>ຄຳອະທິບາຍ :</p>
                         <div
                           className='lao-text'
                           dangerouslySetInnerHTML={{ __html: data?.description }}
@@ -230,7 +232,7 @@ const ProductDetails = () => {
 
        {
         data.category && (
-          <CategoryWiseProductDisplay category={data?.category} heading={"Recommended Products"}/>
+          <CategoryWiseProductDisplay category={data?.category} heading={"ສິນຄ້າທີ່ກ່ຽວຂ້ອງ"}/>
         )
        }
      

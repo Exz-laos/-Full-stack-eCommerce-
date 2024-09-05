@@ -74,14 +74,14 @@ const CategoryProduct = () => {
     };
 
     return (
-        <div className='container mx-auto p-4'>
+        <div className='container lao-text mx-auto p-4'>
             {/* Desktop version */}
             <div className='hidden lg:grid grid-cols-[200px,1fr] gap-4'>
                 {/* Left side */}
                 <div className='bg-white p-2 min-h-[calc(100vh-120px)] overflow-y-scroll'>
                     {/* Sort by */}
                     <div className='mb-4'>
-                        <h3 className='text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300'>Sort by</h3>
+                        <h3 className='text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300'>ລຽງຕາມລາຄາ</h3>
                         <form className='text-sm flex flex-col gap-2 py-2'>
                             <div className='flex items-center gap-3'>
                                 <input
@@ -91,7 +91,7 @@ const CategoryProduct = () => {
                                     onChange={handleOnChangeSortBy}
                                     value="asc"
                                 />
-                                <label>Price - Low to High</label>
+                                <label>ລາຄາ - ຖືກ ຫາ ແພງ</label>
                             </div>
                             <div className='flex items-center gap-3'>
                                 <input
@@ -101,14 +101,14 @@ const CategoryProduct = () => {
                                     onChange={handleOnChangeSortBy}
                                     value="dsc"
                                 />
-                                <label>Price - High to Low</label>
+                                <label>ລາຄາ - ແພງ ຫາ ຖືກ</label>
                             </div>
                         </form>
                     </div>
 
                     {/* Filter by */}
                     <div>
-                        <h3 className='text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300'>Category</h3>
+                        <h3 className='text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300'>ປະເພດ</h3>
                         <form className='text-sm flex flex-col gap-2 py-2'>
                             {productCategory.map((categoryName, index) => (
                                 <div className='flex items-center gap-3' key={index}>
@@ -129,7 +129,7 @@ const CategoryProduct = () => {
 
                 {/* Right side (product) */}
                 <div className='px-4'>
-                    <p className='font-medium text-slate-800 text-lg my-2'>Search Results : {data.length}</p>
+                    <p className='font-medium text-slate-800 text-lg my-2'>ຜົນການຄົ້ນຫາ : {data.length}</p>
                     <div className='min-h-[calc(100vh-120px)] overflow-y-scroll'>
                         {data.length !== 0 && !loading && (
                             <VerticalCard data={data} loading={loading} />
@@ -142,7 +142,7 @@ const CategoryProduct = () => {
             <div className='lg:hidden'>
                 {/* Sort and Filter */}
                 <div className='bg-white p-4 mb-4'>
-                    <h3 className='text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300'>Sort by</h3>
+                    <h3 className='text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300'>ລຽງຕາມລາຄາ</h3>
                     <form className='text-sm flex flex-col gap-2 py-2'>
                         <div className='flex items-center gap-3'>
                             <input
@@ -152,7 +152,7 @@ const CategoryProduct = () => {
                                 onChange={handleOnChangeSortBy}
                                 value="asc"
                             />
-                            <label>Price - Low to High</label>
+                            <label>ລາຄາ - ຖືກ ຫາ ແພງ</label>
                         </div>
                         <div className='flex items-center gap-3'>
                             <input
@@ -162,11 +162,11 @@ const CategoryProduct = () => {
                                 onChange={handleOnChangeSortBy}
                                 value="dsc"
                             />
-                            <label>Price - High to Low</label>
+                            <label>ລາຄາ - ແພງ ຫາ ຖືກ</label>
                         </div>
                     </form>
 
-                    <h3 className='text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300 mt-4'>Category</h3>
+                    <h3 className='text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300 mt-4'>ປະເພດ</h3>
                     <form className='text-sm flex flex-col gap-2 py-2'>
                         {productCategory.map((categoryName, index) => (
                             <div className='flex items-center gap-3' key={index}>
@@ -186,7 +186,7 @@ const CategoryProduct = () => {
 
                 {/* Product List */}
                 <div>
-                    <p className='font-medium text-slate-800 text-lg my-2'>Search Results : {data.length}</p>
+                    <p className='font-medium text-slate-800 text-lg my-2'>ຜົນການຄົ້ນຫາ : {data.length}</p>
                     <div className='overflow-y-scroll'>
                         {data.length !== 0 && !loading && (
                             <VerticalCard data={data} loading={loading} />

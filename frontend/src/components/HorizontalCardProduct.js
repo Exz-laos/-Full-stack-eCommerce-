@@ -87,12 +87,13 @@ const HorizontalCardProduct = ({category, heading}) => {
         ) : (
             data.map((product,index)=>{
                 return (
-                <Link to={"product/" + product?._id} className='w-full min-w-[280px] md:min-w-[320px] max-w-[280px] 
+                <Link to={"product/" + product?._id} className='lao-text w-full min-w-[280px] md:min-w-[320px] max-w-[280px] 
                     md:max-w-[320px] h-44 bg-white rounded-sm shadow flex'>
                     <div className='bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px] '>
                             <img src={product.productImage[0]} 
                             className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply' />
                     </div>
+                    
             
                     <div className='p-4 grid'>
                       <h2 className='font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black'>
@@ -100,16 +101,18 @@ const HorizontalCardProduct = ({category, heading}) => {
                       <p className='capitalize text-slate-500'>{product?.category}</p>
 
                             <div>
-                                <p className='text-black font-medium'>
+                                <p className='text-yellow-700 font-medium'>
                                     { displayKIPCurrency(product?.sellingPrice) }</p>
                                 <p className='text-xs text-slate-500 line-through px-2'>
                                     { displayKIPCurrency(product?.price)  }</p>
+                                    <p className='lao-text text-xs text-lime-600'>ພ້ອມສົ່ງ: {product?.quantity} ອັນ</p>
                             </div>
-                            <button className='text-sm bg-yellow-100 hover:bg-yellow-200
-                             text-black px-3 py-0.5 rounded-full' 
-                              onClick={(e) => handleAddToCart(e,product?._id)}>
-                                Add to Cart
-                            </button>
+                            <button
+                      className='text-sm bg-yellow-500 hover:bg-yellow-700 text-black px-3 py-0.5 rounded-full'
+                      onClick={(e) => handleAddToCart(e, product?._id)}
+                    >
+                      ເພີ່ມເຂົ້າກະຕ່າ
+                    </button>
                     </div>          
                 </Link>
                 )

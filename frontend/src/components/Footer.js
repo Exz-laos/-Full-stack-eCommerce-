@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFacebook, FaWhatsapp } from 'react-icons/fa'; // Importing Facebook and WhatsApp icons
 import Logo from '../assest/logo.png'; // Ensure the path and format are correct
-
+import { AiFillTikTok } from "react-icons/ai";
 const Footer = () => {
   return (
     <footer className='bg-yellow-100'>
@@ -33,16 +33,18 @@ const Footer = () => {
           <div className='lao-text py-10 mb-4 md:mb-0 md:w-1/3'>
             <div className='text-center md:text-left' title='Contact Information'>
               <p className='text-lg font-semibold'>ຕິດຕໍ່ເຮົາ</p>
-              <p>Email: info@yourstore.com</p>
-              <p>Phone: +123 456 7890</p>
-              <p>Address: 123 Main St, Your City, Your Country</p>
-              {/* Social Media Links */}
+      
+         
               <div className='flex justify-center md:justify-start mt-2'>
                 <a href='https://www.facebook.com/savannkoppha' target='_blank' rel='noopener noreferrer' className='text-blue-400 mr-4'>
-                  <FaFacebook size={30} />
+                  <FaFacebook size={50} />
                 </a>
                 <a href='https://wa.me/+8562055698289' target='_blank' rel='noopener noreferrer' className='text-green-400'>
-                  <FaWhatsapp size={30} />
+                  <FaWhatsapp size={50} />
+                </a>
+                <a href='https://www.tiktok.com/@amuletlaos?_t=8pSgxJxRYoi&_r=1' target='_blank' rel='noopener noreferrer' >
+                <AiFillTikTok size={50}  />
+                
                 </a>
               </div>
             </div>

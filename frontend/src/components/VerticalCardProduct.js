@@ -88,31 +88,48 @@ const VerticalCardProduct = ({category, heading}) => {
                 return (
                 <Link to={"product/" + product?._id} 
                 className='w-full min-w-[280px] md:min-w-[320px] max-w-[280px] 
-                    md:max-w-[320px] bg-white rounded-sm shadow'>
-                    <div className='bg-slate-200 h-56 p-4 min-w-[280px] md:min-w-[145px] 
-                     flex justify-center items-center'>
-                            <img src={product.productImage[0]} 
-                            className='object-scale-down h-full hover:scale-110 transition-all 
-                            mix-blend-multiply' />
-                    </div>
-            
-                    <div className='p-4 grid gap-3'>
+                    md:max-w-[320px] bg-white rounded-sm shadow'>   
+                     <div className='relative bg-slate-200 h-56 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center'>
+                    <img
+                      src={product.productImage[0]}
+                      className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply'
+                      alt='Product'
+                    />
+                
+                  </div>
+                  
+                  <div className='lao-text p-4 grid gap-3'>
+                    <div className='flex items-center gap-2'>
                       <h2 className='font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black'>
-                            {product?.productName}</h2>
-                      <p className='capitalize text-slate-500'>{product?.category}</p>
-
-                            <div className='flex'>
-                                <p className='text-2xl text-black font-medium'>
-                                    { displayKIPCurrency(product?.sellingPrice) }</p>
-                                <p className='text-base text-slate-500 line-through px-3 py-4'>
-                                    { displayKIPCurrency(product?.price)  }</p>
-                            </div>
-                            <button className='text-sm bg-yellow-200 hover:bg-yellow-700
-                             text-black px-3 py-0.5 rounded-full' 
-                             onClick={(e) => handleAddToCart(e,product?._id)} >
-                                Add to Cart
-                            </button>
+                        {product?.productName}
+                      </h2>
                     </div>
+                    <p className='capitalize text-slate-500'>{product?.category}</p>
+                    <div>
+                    <div className='flex'>
+                      <p className='text-2xl text-yellow-700 font-medium'>
+                        {displayKIPCurrency(product?.sellingPrice)}
+                      </p>
+                      <p className='text-base text-slate-500 line-through px-3 py-4'>
+                        {displayKIPCurrency(product?.price)}
+                      </p>
+                  
+                    </div>
+                    <p className='lao-text text-xs text-lime-600'>ພ້ອມສົ່ງ: {product?.quantity} ອັນ</p>
+                    </div>
+                  
+                  
+                 
+                    <button
+                      className='text-sm bg-yellow-500 hover:bg-yellow-700 text-black px-3 py-0.5 rounded-full'
+                      onClick={(e) => handleAddToCart(e, product?._id)}
+                    >
+                      ເພີ່ມເຂົ້າກະຕ່າ
+                    </button>
+                  </div>
+                  
+                 
+
   
                 </Link>
                 )

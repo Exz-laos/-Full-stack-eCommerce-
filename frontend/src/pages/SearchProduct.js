@@ -29,18 +29,18 @@ const SearchProduct = () => {
 
   return (
     
-    <div className='container mx-auto p-4'>
+    <div className='container lao-text mx-auto p-4'>
         {
         loading && (
-          <p className='text-lg text-center'>Loading ...</p>
+          <p className='text-lg text-center'>ກຳລັງໂຫຼດ ...</p>
         )
       }
  
-      <p className='text-lg font-semibold my-3'>Search Results : {data.length}</p>
+      <p className='text-lg font-semibold my-3'>ຜົນການຄົ້ນຫາ : {data.length}</p>
 
       {
         data.length === 0 && !loading && (
-           <p className='bg-white text-lg text-center p-4'>No Data Found....</p>
+           <p className='bg-white text-lg text-center p-4'>ບໍ່ມີຂໍ້ມູນ....</p>
         )
       }
 
